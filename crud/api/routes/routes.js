@@ -4,6 +4,8 @@ var router = express.Router();
 const authCtrl = require('../controllers/authentication');
 const usersCtrl = require('../controllers/users');
 
+let {jwtAuth} = require('../middleware/auth');
+
 router
     .route('/users')
         .get(usersCtrl.getAll);
@@ -12,7 +14,7 @@ router
 router
     .route('/users/:username')
         .get(usersCtrl.getOne)
-        .put(usersCtrl.put);
+        .put(jwtAuth, usersCtrl.put);
 
 router.post('/register', authCtrl.register);
 router.post('/login', authCtrl.login);

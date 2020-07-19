@@ -48,7 +48,7 @@ const login = (req, res) => {
                 res.status(404).json(err);
             }
             else {
-                if(!user){
+                if(!user || user.length == 0){
                     res.status(404).json({"message": "user not found"});
                 }
                 else {

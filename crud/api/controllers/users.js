@@ -38,7 +38,6 @@ const getOne = (req, res) => {
 
 const put = (req, res) => {
     const { username } = req.params;
-    console.log(username);
     User.find({ username })
         .exec((err, user) => {
             if (err) {
@@ -50,13 +49,15 @@ const put = (req, res) => {
                 }
                 else {
                     user = user[0];
+                    /*
                     let bearer = req.header('Authorization');
                     if(!bearer){
                         res.status(401).json({ "message": "not allowed" });
                     }
+                    */
+                    let bearer = req.header('Authorization');
                     let token = bearer.split(" ")[1];
                     let payload = jwt.verify(token, jwtKey);
-                    console.log("payload.username", payload.username, "user.username : ", user.username);
                     if(payload.username != user.username){
                         res.status(401).json({ "message": "not allowed" });
                     }
