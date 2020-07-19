@@ -8,11 +8,11 @@ For testing application use [Postman](https://www.getpostman.com/) or [Insomnia]
 
 Method | URL | description | access
 -------|---- | ------------|--------
-POST      |/api/login                               | login                     | all
-POST      |/api/register                            | create new user           | all
-GET       |/users                                   | get all users             | all
-GET       |/users/{id}                              | get user                  | all
-PUT       |/users/:username                         | update user               | user 
+POST      |/api/login                                    | login                     | all
+POST      |/api/register                                 | create new user           | all
+GET       |/users                                        | get all users             | all
+GET       |/users/:username                              | get user                  | all
+PUT       |/users/:username                              | update user               | user 
 
 
 JSON format when register:
@@ -45,9 +45,9 @@ JSON format when adding new user or updating:
 }
 ```
 
-When updating, you can ommit some properties. For example, if you want to update article:
+When updating, you can ommit some properties. For example, if you want to update user:
 ```
 {
-	"title": "Spring"
+	"username": "John"
 }
 ```
