@@ -9,11 +9,11 @@ For testing application use [Postman](https://www.getpostman.com/) or [Insomnia]
 Method | URL | description | access
 -------|---- | ------------|--------
 POST      |/api/login                                  | login                     | all users
+POST      |/api/logout                                 | login                     | authenticated user
 POST      |/api/users                                  | create new user           | all users
-GET       |/api/users                                  | get all users             | all users
-GET       |/api/users/:id                              | get user                  | all users
+GET       |/api/users/:id                              | get user                  | authenticated user
 PATCH     |/api/users/:id                              | update user               | authenticated user
-DELETE    |/api/users/:id                              | update user               | authenticated user
+DELETE    |/api/users/:id                              | delete user               | authenticated user
 
 
 JSON format when register:
