@@ -36,6 +36,7 @@ JSON format when login:
 After registration or login, user will get token. That token must be sent with every request in Authorization header. 
 Authorization - "Bearer " + token
 
+Authenticated users can see only their user profile, update it or delete it. 
 
 JSON format when adding new user or updating:
 ```
