@@ -3,53 +3,64 @@ Node express crud app. JWT authorization.
 
 
 
-For testing application use [Postman](https://www.getpostman.com/) or [Insomnia](https://insomnia.rest/).
+For testing application use [Postman](https://www.getpostman.com/). There is a postman collection in each project.
+
+Open terminal in project directory and run:
+
+```
+- docker-compose up --build
+
+```
+
+In another terminal window open project and run:
+
+```
+npm install
+npm run start-dev
+
+```
+
+In authMiddleware, add payload to req object
+```
+payload = jwt.verify(token, global.jwtKey);
+// add payload to req
+req.payload = payload;
+```
+Access payload in controller
+```
+app.get("/protected", authMiddleware, async (req, res, next) => {
+    console.log(req.payload);
+    res.status(200).json({message: "Protected page"});
+});
+```
 
 
-Method | URL | description | access
--------|---- | ------------|--------
-POST      |/api/login                                  | login                     | all users
-POST      |/api/logout                                 | login                     | authenticated user
-POST      |/api/users                                  | create new user           | all users
-GET       |/api/users/:id                              | get user                  | authenticated user
-PATCH     |/api/users/:id                              | update user               | authenticated user
-DELETE    |/api/users/:id                              | delete user               | authenticated user
+Method | Path | Description
+-------|------|------------ 
+POST       |/login                           | login
+POST       |/users                           | create user                    
+GET        |/users                           | get all users                     
+GET        |/users/:id                       | get user by id                   
+PATCH      |/users/:id                       | update user                    
+DELETE     |/users/:id                       | delete user 
+GET        |/public                          | all users can access
+GET        |/protected                       | only logged users can access
 
 
-JSON format when register:
+Request body when creating user
 ```
 {
-    "username": "yourUsername",
-    "email": "yourEmail",
-    "password": "yourPassword"
+  "username": "john",
+  "email": "john@example.com",
+  "password": "john"
 }
 ```
 
-
-JSON format when login:
+Request body when updating user can contain all fields or some fileds. 
+If user submit new password, password will be updated.
 ```
 {
-    "username": "yourUsername",
-    "password": "yourPassword"
-}
-```
-After registration or login, user will get token. That token must be sent with every request in Authorization header. 
-Authorization - "Bearer " + token
-
-Authenticated users can see only their user profile, update it or delete it. 
-
-JSON format when adding new user or updating:
-```
-{
-	"username": "John",
-	"password": "secret",
-	"email": "john@example.com"
-}
-```
-
-When updating, you can ommit some properties. For example, if you want to update user:
-```
-{
-	"username": "John"
+  "username": "johnupdated",
+  "email": "johnupdated@example.com"
 }
 ```
