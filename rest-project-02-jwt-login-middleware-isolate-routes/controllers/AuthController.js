@@ -18,7 +18,7 @@ const loginController = async (req, res, next) => {
             expiresIn: global.jwtExpires
         });
         res.set('Authorization', `Bearer ${token}`);
-        return res.status(204).json(null);
+        return res.status(200).json(null);
     } catch (error) {
         next(error);
     }
